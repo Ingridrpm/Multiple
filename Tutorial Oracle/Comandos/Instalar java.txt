@@ -1,0 +1,29 @@
+java -version //qué version de java tenemos, si es que tenemos alguna instalada
+
+INSTALACIÓN DE JAVA
+--sudo add-apt-repository ppa:webupd8team/java
+--sudo apt-get update
+--sudo apt-get install oracle-java8-
+
+
+sudo gedit /etc/bash.bashrc
+
+EN EL EDITOR:
+export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+export PATH=$JAVA_HOME/bin:$PATH
+
+Cargar los cambios con control+O, ya después en el terminal ejecutar  el comando:
+source /etc/bash.bashrc
+
+Para validar los cambios ejecutar:
+echo $JAVA_HOME
+
+Nos deberá aparecer el siguiente directorio:
+	
+/usr/lib/jvm/java-8-oracle
+
+
+
+
+
+

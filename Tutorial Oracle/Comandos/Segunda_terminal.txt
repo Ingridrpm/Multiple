@@ -1,0 +1,64 @@
+SEGUNDA TERMINAL
+ejecutar en el terminal:	
+sudo gedit /sbin/chkconfig
+
+Se abre un editor, copiar el código en el editor y guardar:
+/////////////////////////////////////
+#!/bin/bash
+# Oracle 11gR2 XE installer chkconfig hack for Ubuntu
+file=/etc/init.d/oracle-xe
+if [[ ! `tail -n1 $file | grep INIT` ]]; then
+echo >> $file
+echo '### BEGIN INIT INFO' >> $file
+echo '# Provides: OracleXE' >> $file
+echo '# Required-Start: $remote_fs $syslog' >> $file
+echo '# Required-Stop: $remote_fs $syslog' >> $file
+echo '# Default-Start: 2 3 4 5' >> $file
+echo '# Default-Stop: 0 1 6' >> $file
+echo '# Short-Description: Oracle 11g Express Edition' >> $file
+echo '### END INIT INFO' >> $file	
+fi
+update-rc.d oracle-xe defaults 80 01
+#EOF
+//////////////////////////////////
+ctrl + x
+
+Ya guardado el código anterior, ejecutar en el terminal:	
+sudo chmod 755 /sbin/chkconfig
+
+Ejecutar en terminal también:	
+sudo gedit /etc/sysctl.d/60-oracle.conf
+
+Copiar el código en el editor del archivo anterior y guardar después.	
+//////////////////////////////
+# Oracle 11g XE kernel parameters
+fs.file-max=6815744	
+net.ipv4.ip_local_port_range=9000 65000	
+kernel.sem=250 32000 100 128	
+kernel.shmmax=536870912
+/////////////////////////////
+
+
+Verificando algunos parámetros, ejecutar en el terminal:	
+sudo cat /etc/sysctl.d/60-oracle.conf
+
+Cargando los parámetros del kernel, ejecutar en terminal:
+sudo service procps start
+
+Puedes ver los cambios ejecutando en el terminal:
+sudo sysctl -q fs.file-max
+
+Otra opción para observar, ejecutar en el terminal:
+fs.file-max = 6815744
+
+
+Ejecutar este comando en el terminal:
+sudo ln -s /usr/bin/awk /bin/awk
+
+	
+mkdir /var/lock/subsys
+
+	
+touch /var/lock/subsys/listener
+
+Cerrar el 2do terminal y volver al primero, ejecutar lo siguiente en el terminal.

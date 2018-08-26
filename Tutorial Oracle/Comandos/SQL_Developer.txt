@@ -1,0 +1,25 @@
+SQL DEVELOPER
+Descargar SQL Developer desde
+ http://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/index.html. 
+
+Abrir consola terminal e introducir
+cd Downloads
+
+Extrae el paquete con el codigo
+sudo alien --scripts -d sqldeveloper-4.0.0.13.80-1.noarch.rpm
+
+Se creo un ***.deb, ejecutarlo con
+sudo dpkg --install sqldeveloper_4.0.0.13.80-2_all.deb
+
+Crear un folder para sql, ingresar en terminal
+sudo mkdir /home/.sqldeveloper/
+
+Ejecutar SQL desde terminal
+sudo /opt/sqldeveloper/sqldeveloper.sh
+
+Ahora ingresar la ubicación del JDK.
+/usr/lib/jvm/java-8-oracle
+
+
+Esto sería todo para tener los programas para base de datos.
+Al abrir por primera vez el SQL, en caso de no tener una version anterior, obviar la sincronizacion. Para probar si funciona el SQL, conectarse con el usuario SYSTEM, password "oracle". 

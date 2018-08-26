@@ -1,0 +1,92 @@
+Oracle 
+INSTALAR LA APLICACION	
+sudo apt-get install alien libaio1 unixodbc
+
+DESCARGAR DESDE:
+http://www.oracle.com/technetwork/products/express-edition/downloads 
+
+En el terminal ejecutar:
+cd Descargas
+
+Desempaquetar a través de terminal con el comando:
+unzip oracle-xe-11.2.0-1.0.x86_64.rpm.zip
+
+Ejecutar en terminal:	
+cd Disk1
+
+Ejecutar en terminal:
+sudo alien --scripts -d oracle-xe-11.2.0-1.0.x86_64.rpm
+
+/////////////////////////////////////
+SEGUNDA TERMINAL
+////////////////////////////////////
+
+ejecutar lo siguiente en el terminal:
+sudo dpkg --install oracle-xe_11.2.0-2_amd64.deb
+
+	
+Ejecutar en terminal los siguientes códigos
+
+sudo rm -rf /dev/shm
+	
+sudo mkdir /dev/shm
+	
+sudo mount -t tmpfs shmfs -o size=4096m /dev/shm
+
+Cargar este file en el terminal	
+sudo gedit /etc/rc2.d/S01shm_load
+
+Copiar y guardar este código en el editor del comando anterior
+/////////////////////////////////
+#!/bin/sh
+case "$1" in
+start) mkdir /var/lock/subsys 2>/dev/null
+touch /var/lock/subsys/listener
+rm /dev/shm 2>/dev/null
+mkdir /dev/shm 2>/dev/null
+mount -t tmpfs shmfs -o size=4096m /dev/shm ;;
+*) echo error
+exit 1 ;;
+esac
+/////////////////////////////////////
+
+Dandole privilegios, ejecutar en terminal
+sudo chmod 755 /etc/rc2.d/S01shm_load
+
+
+
+--CONFIGURANDO ORACLE
+ Inicializar en terminal
+sudo /etc/init.d/oracle-xe configure
+
+Abrir en terminal
+sudo gedit /etc/bash.bashrc
+
+Copiar y guardar el siguiente código.
+/////////////////////////////////////
+export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe
+export ORACLE_SID=XE
+export NLS_LANG=`$ORACLE_HOME/bin/nls_lang.sh`
+export ORACLE_BASE=/u01/app/oracle
+export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH
+export PATH=$ORACLE_HOME/bin:$PATH
+///////////////////////////////////
+
+Ejecutar el código para validar los cambios.	
+source /etc/bash.bashrc
+
+Ejecutar este código en terminal después:
+echo $ORACLE_HOME
+
+Ejecutar en terminal también.
+/u01/app/oracle/product/11.2.0/xe
+
+Reiniciar la pc y despues del encendido, en el terminal ejecutar
+sudo service oracle-xe start
+
+Se crea un icono en el escritorio
+cd ~/Desktop
+
+Ejecutar en el terminal.
+sudo chmod a+x oraclexe-gettingstarted.desktop
+
